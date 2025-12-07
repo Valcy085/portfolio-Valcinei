@@ -210,7 +210,7 @@
       margin-bottom: 20px;
     }
     
-    /* Contato */
+    /* Contato - Estilos atualizados para links */
     .contact-info {
       display: flex;
       flex-direction: column;
@@ -227,10 +227,26 @@
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
       transition: transform 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
     
     .contact-item:hover {
       transform: translateX(10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .contact-item.email:hover {
+      background-color: #f0f8ff;
+    }
+    
+    .contact-item.whatsapp:hover {
+      background-color: #f0fff4;
+    }
+    
+    .contact-item.location:hover {
+      background-color: #f9f0ff;
     }
     
     .contact-icon {
@@ -252,6 +268,23 @@
     
     .contact-details p {
       color: #666;
+    }
+    
+    /* Estilo específico para links de contato */
+    .contact-link {
+      color: #4361ee;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-block;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    
+    .contact-link:hover {
+      color: #4cc9f0;
+      background-color: rgba(76, 201, 240, 0.1);
+      transform: translateY(-2px);
     }
     
     /* Footer */
@@ -281,6 +314,7 @@
       color: white;
       font-size: 1.2rem;
       transition: all 0.3s ease;
+      text-decoration: none;
     }
     
     .social-icon:hover {
@@ -401,30 +435,35 @@
 
     <section class="section" id="contato">
       <h2 class="section-title">Contato</h2>
-      <p class="about-text">Estou aberto a oportunidades de aprendizado, colaborações em projetos ou simplesmente para trocar ideias sobre tecnologia.</p>
+      <p class="about-text">Estou aberto a oportunidades de aprendizado, colaborações em projetos ou simplesmente para trocar ideias sobre tecnologia. Clique em qualquer item abaixo para entrar em contato:</p>
       
       <div class="contact-info">
-        <div class="contact-item">
+        <!-- Email como link -->
+        <a href="mailto:valcineimateus@gmail.com?subject=Contato%20Portfólio&body=Olá%20Valcinei,%20vim%20através%20do%20seu%20portfólio!" class="contact-item email">
           <div class="contact-icon">
             <i class="fas fa-envelope"></i>
           </div>
           <div class="contact-details">
             <h4>Email</h4>
             <p>valcineimateus@gmail.com</p>
+            <small style="color: #4cc9f0; font-size: 0.85rem;">Clique para enviar um email</small>
           </div>
-        </div>
+        </a>
         
-        <div class="contact-item">
+        <!-- WhatsApp como link -->
+        <a href="https://wa.me/5585991916705?text=Olá%20Valcinei,%20vim%20através%20do%20seu%20portfólio!" target="_blank" class="contact-item whatsapp">
           <div class="contact-icon">
-            <i class="fas fa-phone-alt"></i>
+            <i class="fab fa-whatsapp"></i>
           </div>
           <div class="contact-details">
             <h4>WhatsApp</h4>
             <p>(85) 99191-6705</p>
+            <small style="color: #25D366; font-size: 0.85rem;">Clique para iniciar conversa</small>
           </div>
-        </div>
+        </a>
         
-        <div class="contact-item">
+        <!-- Localização -->
+        <div class="contact-item location">
           <div class="contact-icon">
             <i class="fas fa-map-marker-alt"></i>
           </div>
@@ -433,6 +472,21 @@
             <p>Fortaleza, CE - Brasil</p>
           </div>
         </div>
+      </div>
+      
+      <!-- Links diretos também disponíveis -->
+      <div style="margin-top: 30px; padding: 20px; background-color: rgba(240, 245, 255, 0.7); border-radius: 10px;">
+        <h4 style="color: #16213e; margin-bottom: 15px;">Contatos Diretos:</h4>
+        <p>
+          <strong>Email:</strong> 
+          <a href="mailto:valcineimateus@gmail.com" class="contact-link">valcineimateus@gmail.com</a>
+          <span style="margin: 0 10px;">|</span>
+          <strong>WhatsApp:</strong> 
+          <a href="https://wa.me/5585991916705" target="_blank" class="contact-link">(85) 99191-6705</a>
+        </p>
+        <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+          Clique nos links acima para entrar em contato diretamente
+        </p>
       </div>
     </section>
 
@@ -676,6 +730,44 @@
       const githubLink = document.querySelector('a .fa-github').parentElement;
       githubLink.href = "https://github.com";
       githubLink.target = "_blank";
+      
+      // Função para copiar email para área de transferência
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+          // Mostrar mensagem de confirmação
+          const notification = document.createElement('div');
+          notification.textContent = 'Copiado para a área de transferência!';
+          notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4361ee;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: fadeInOut 3s ease;
+          `;
+          document.body.appendChild(notification);
+          
+          setTimeout(() => {
+            notification.remove();
+          }, 3000);
+        });
+      }
+      
+      // Adicionar estilos para animação de notificação
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes fadeInOut {
+          0% { opacity: 0; transform: translateY(-20px); }
+          15% { opacity: 1; transform: translateY(0); }
+          85% { opacity: 1; transform: translateY(0); }
+          100% { opacity: 0; transform: translateY(-20px); }
+        }
+      `;
+      document.head.appendChild(style);
     });
   </script>
 </body>
